@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future Event Registro</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/cookies.js"></script>
+</head>
+<body onload="cargaDatos()">
+    <img src="img/logo.jpg" alt="" srcset="" class="centerImage" onclick="borraCookie()"/>
+    <div class="title2">Gracias por registrarte</div>
+    <br><br><br>
+    <div class="title">Perteneces al equipo:</div>
+    <div class="title3" id="equipo">Grupo 1</div>
+    <img src="img/equipo.jpg" alt="" srcset="" class="centerImage" />
+    <img src="img/Registro_equipos.jpg" alt="" srcset="" class="centerImage2" />
+    
+    <script>
+        async function cargaDatos(){
+
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            equipo = urlParams.get('equipo');
+
+            let equipoDiv = document.getElementById("equipo");
+            equipoDiv.innerHTML = `Grupo ${equipo}`
+            //wait 5 seconds and redict to welcome.html
+            setTimeout(function(){ window.location.href = `welcome.html`; }, 5000);
+        }
+    </script>
+</body>
+</html>

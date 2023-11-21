@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future Event Registro</title>
+    <link rel="stylesheet" href="css/style.css">
+    
+</head>
+<body onload="cargaDatos()">
+    <img src="img/logo.jpg" alt="" srcset="" class="centerImage" onclick="borraCookie()"/>
+    <div class="title2">Portal</div>
+    <br><br><br>
+    <div class="title" id="nombreCompleto">Total de puntos conseguidos:</div>
+    <div class="title3" id="puntosTotales">Grupo 1</div>
+    <img src="img/equipo.jpg" alt="" srcset="" class="centerImage" />
+    <img src="img/muchasMonedas.webp" alt="" srcset="" class="centerImage3" />
+    <script src="js/cookies.js"></script>
+    <script>
+        let urlServer = "https://mosaico.app:4000/CocaColaFutureEvent/"
+        async function cargaDatos(){
+
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            let uuidExperiencias = urlParams.get('uuid');
+            let puntos = urlParams.get('puntos');
+ 
+            console.log({uuidExperiencias})
+            console.log({numPuntos})
+
+            let uuidUsuarios = getCookie("uuidUsuarios")
+            if(!uuidUsuarios){
+                window.location.href = `index.html?uuid=${uuidExperiencias}&puntos=${numPuntos}`
+            }
+            
+            dataJson = {
+                "uuidUsuarios": uuidUsuarios,
+                "uuidExperiencias": uuidExperiencias,
+                "puntosExperiencias": numPuntos
+            }
+
+            const settings = {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: 
+                    JSON.stringify(dataJson)
+            };
+                            
+            try {
+                const fetchResponse = await fetch(`${urlServer}dameUsuarioByUUID`, settings);
+                const data = await fetchResponse.json();
+                resul = data.statusCode
+                let puntosTotales = data.message[0].puntosTotales
+                let nombreCompleto = data.message[0].nombreCompleto
+                
+                document.getElementById("totalPuntos").innerHTML = puntosTotales
+                document.getElementById("nombreCompleto").innerHTML = nombreCompleto
+                
+                if(resul == 200){
+                    nombreCompleto = data.message[0].nombreCompleto
+                    document.getElementById("nombreCompleto").innerHTML = nombreCompleto
+                    let puntosTotales = data.message[0].puntosTotales
+                    document.getElementById("puntosTotales").innerHTML = puntosTotales === null ? "0" : puntosTotales
+                }else{
+                    console.log("Error: " + data.message)
+                }
+            } catch (e) {
+                console.log("Error:" + e)
+            }
+
+        }
+    </script>
+</body>
+</html>
