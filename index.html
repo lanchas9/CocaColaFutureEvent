@@ -95,7 +95,7 @@
                     let uuidUsuarios = objeto.uuidUsuarios
                     let idEquipos = objeto.idEquipos
                     setCookie("uuidUsuarios", uuidUsuarios, 10)
-                    let usuarioNuevo = resul.statusCode == 200? true : false
+                    let usuarioNuevo = resul.usuarioNuevo
                     if(usuarioNuevo){
                         window.location.href = `equipo.html?equipo=${idEquipos}`
                         return;
