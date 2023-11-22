@@ -27,7 +27,7 @@
             </div>
         </div>
         <div id="mensajeError" class="mensajeError"></div>
-        <button class="botonRegistrarse" onclick="guardaDatos()">Guardar Regisrto</button>
+        <button class="botonRegistrarse" onclick="guardaDatos()">Guardar Registro</button>
     </div>
     <script src="js/cookies.js"></script>
     <script>
@@ -152,6 +152,7 @@
                 resul.idUsuario = data.message.insertId
                 resul.message = data.message
                 resul.uuidUsuarios = data.message.uuidUsuarios
+                resul.usuarioNuevo = data.message.usuarioNuevo
             }else{                        
                 resul.statusCode = data.statusCode
                 resul.message = data.message

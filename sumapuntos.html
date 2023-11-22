@@ -10,8 +10,8 @@
     <img src="img/logo.jpg" alt="" srcset="" class="centerImage" onclick="borraCookie()"/>
     <div class="title2">Gracias por registrarte</div>
     <br><br><br>
-    <div class="title">Perteneces al equipo:</div>
-    <div class="title3" id="equipo">Grupo 1</div>
+    <div class="title" id="numTotalMonedas">Agregamos 0 puntos nuevos</div>
+    <div class="title3" id="numNuevasMonedas">0 puntos</div>
     <img src="img/equipo.jpg" alt="" srcset="" class="centerImage" />
     <img src="img/2monedas.webp" alt="" srcset="" class="centerImage3" />
     
@@ -28,7 +28,7 @@
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
             let uuidExperiencias = urlParams.get('uuid');
-            let puntos = urlParams.get('puntos');
+            let numPuntos = urlParams.get('puntos');
  
             console.log({uuidExperiencias})
             console.log({numPuntos})
@@ -59,16 +59,18 @@
                 const data = await fetchResponse.json();
                 resul = data.statusCode
                 let puntosTotales = data.message[0].puntosTotales
-                let nombreCompleto = data.message[0].nombreCompleto
+                let puntosAgregados = data.message[0].puntosAgregados
                 
-                document.getElementById("totalPuntos").innerHTML = puntosTotales
-                document.getElementById("nombreCompleto").innerHTML = nombreCompleto
+                // document.getElementById("totalPuntos").innerHTML = puntosTotales
+                // document.getElementById("nombreCompleto").innerHTML = nombreCompleto
                 
                 if(resul == 200){
-                    document.getElementById("numTotalMonedas").innerHTML = "Te hemos agregado " + numPuntos + " puntos"
+                    document.getElementById("numTotalMonedas").innerHTML = "Te hemos agregado " + puntosAgregados + " puntos"
+                    document.getElementById("numNuevasMonedas").innerHTML = puntosTotales + " puntos"
                     console.log("Puntos nuevos para este usuario")
                 }else{
                     document.getElementById("numTotalMonedas").innerHTML = "Código QR ya escaneado previamente, inválido."
+                    document.getElementById("numNuevasMonedas").innerHTML = puntosTotales + " puntos"
                     console.log("Puntos ya asignados a ese usuario")
                 }
             } catch (e) {
