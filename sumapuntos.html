@@ -17,6 +17,11 @@
     
     <script src="js/cookies.js"></script>
     <script>
+
+        function borraCookie(){
+            setCookie("uuidUsuarios", "",10)
+        }
+        
         let urlServer = "https://mosaico.app:4000/CocaColaFutureEvent/"
         async function cargaDatos(){
 

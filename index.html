@@ -27,14 +27,14 @@
             </div>
         </div>
         <div id="mensajeError" class="mensajeError"></div>
-        <button class="botonRegistrarse" onclick="validaDatos()">Guardar Regisrto</button>
+        <button class="botonRegistrarse" onclick="guardaDatos()">Guardar Regisrto</button>
     </div>
     <script src="js/cookies.js"></script>
     <script>
         let urlServer = "https://mosaico.app:4000/CocaColaFutureEvent/"
 
-        let uuid = ""
-        let puntos = ""
+        let uuidExperiencias = ""
+        let numPuntos = ""
         let botonGuardarDatos = false
 
         
@@ -50,8 +50,8 @@
 
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
-            uuid = urlParams.get('uuid');
-            puntos = urlParams.get('puntos');
+            uuidExperiencias = urlParams.get('uuid');
+            numPuntos = urlParams.get('puntos');
 
             // if(uuid == null || puntos == null){
             //     window.location.href = `index.html`
@@ -64,22 +64,23 @@
                 return;
             }
             botonGuardarDatos = true;
-            let valido = false
+            let valido = true
+            let mensaje = ""
 
             document.getElementById("mensajeError").innerHTML = ""
             let correoElectronico = new String(document.getElementById("correoElectronico").value);
             let nombreCompleto = new String(document.getElementById("nombreCompleto").value);
             
             correoElectronico = correoElectronico.trim()
-                        
+           
+            if (nombreCompleto.length <= 5) {
+                valido = false
+                mensaje = "Nombre demasiado corto"
+            }
+             
             if(mailInValido(correoElectronico)){
                 valido = false
                 mensaje = "correo electrónico no válido"
-            }
-
-            if (nombreCompleto.length = 5) {
-                valido = false
-                mensaje = "Nombre demasiado corto"
             }
 
             let datosRegistro = {
@@ -87,27 +88,33 @@
                 "nombreCompleto": nombreCompleto,
             }
             
-            if (!valido){
+            if (valido){
                 let resul = await guardaEnServer(datosRegistro);
                 if (resul.error == false){
-                    let uuidUsuarios = resul.uuidUsuarios
+                    let objeto = resul.message
+                    let uuidUsuarios = objeto.uuidUsuarios
+                    let idEquipos = objeto.idEquipos
                     setCookie("uuidUsuarios", uuidUsuarios, 10)
-
+                    let usuarioNuevo = resul.statusCode == 200? true : false
                     if(usuarioNuevo){
-                        window.location.href = `equipo.html?equipo=${idEquipo}`
-                    }
-
-                    if((uuidExperiencias === null) && (numPuntos === null) ){
+                        window.location.href = `equipo.html?equipo=${idEquipos}`
+                        return;
+                    }else if((uuidExperiencias === null) && (numPuntos === null) ){
                         window.location.href = `welcome.html`
+                        return;
                     }else if((uuidExperiencias != "") && (numPuntos != "") ){
                         window.location.href = `sumaPuntos.html?uuidExperiencias=${uuidExperiencias}&numPuntos=${numPuntos}`
+                        return;
                     }else{
                         window.location.href = `welcome.html`
+                        return;
                     }
                     
                 }else{
                     document.getElementById("mensajeError").innerHTML = resul.message
                 }
+            }else{
+                document.getElementById("mensajeError").innerHTML = mensaje
             }
             botonGuardarDatos = false;
         }

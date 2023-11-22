@@ -51,7 +51,7 @@ body {
     font-weight: bold;
     margin: 0;
     padding: 0;
-    margin-top: 30%;
+    margin-top: 7.5%;
     width: 50%;
     margin-left: 25%;
     position: absolute;
@@ -127,7 +127,7 @@ body {
     color: #f7f7f7;
     height: 25px;
     margin-top: 5%;
-    width: 30%;
+    width: 40%;
     font-size: 11px;
     margin-bottom: 5%;
     border-radius: 10px;
@@ -137,4 +137,9 @@ body {
 .left{
     text-align: right;
     font-size: xx-small;
+}
+
+.margen90{
+    width: 90%;
+    margin-left: 5%;
 }

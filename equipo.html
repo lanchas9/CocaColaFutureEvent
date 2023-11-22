@@ -17,6 +17,10 @@
     <img src="img/Registro_equipos.jpg" alt="" srcset="" class="centerImage2" />
     <script src="js/cookies.js"></script>
     <script>
+        function borraCookie(){
+            setCookie("uuidUsuarios", "",10)
+        }
+
         async function cargaDatos(){
 
             const queryString = window.location.search;
@@ -26,7 +30,7 @@
             let equipoDiv = document.getElementById("equipo");
             equipoDiv.innerHTML = `Grupo ${equipo}`
             //wait 5 seconds and redict to welcome.html
-            setTimeout(function(){ window.location.href = `welcome.html`; }, 5000);
+           
         }
     </script>
 </body>
