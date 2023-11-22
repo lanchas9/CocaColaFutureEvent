@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trivia Deportiva</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <img src="img/logo.jpg" alt="" srcset="" class="centerImage" onclick="borraCookie()"/>
+    <div class="title">Trivia Deportiva "Future Event" </div>
+    <div class="goldLine"></div>
+    <div class="instructions">
+        Contesta correctamente las preguntas de la trivia para ganar puntos. <br>
+        Por favor no inicies la trivia hasta que nuestro staff te lo indique <br>
+    </div>
+    <div class="goldLine"></div>
+    <div class="registrationForm">
+        <button class="botonRegistrarse centerImage" onclick="continuar()">Iniciar Trivia</button>
+    </div>
+<script>
+    async function continuar(){
+        window.location.href = "preguntas.html";
+    }
+</script>
+</body>
+</html>
