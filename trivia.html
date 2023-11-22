@@ -6,11 +6,59 @@
     <title>Trivia Deportiva</title>
     <link rel="stylesheet" href="css/styleTrivia.css">
 </head>
-<body>   
-    <button class="botonContinuar" onclick="continuar()">Continuar</button>
+<body onload="loadGrupo()">   
+    <button class="botonContinuar" onclick="continuar()" id="botonContinuar">Continuar</button>
+    <script src="js/cookies.js"></script>
 <script>
+    let urlServer = "https://mosaico.app:4000/CocaColaFutureEvent/"
     async function continuar(){
         window.location.href = "instrucciones.html";
+    }
+
+    async function loadGrupo(){
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        let idEquipos = urlParams.get('equipo');
+
+        if(idEquipos !== null){
+            document.getElementById("botonContinuar").innerHTML = "Grupo " + idEquipos
+            return;
+        }
+
+        let uuidExperiencias = "342ed9ae-771d-481c-97d2-25309812f771"
+        let uuidUsuarios = getCookie("uuidUsuarios")
+            if(!uuidUsuarios){
+                window.location.href = `index.html?uuid=${uuidExperiencias}&url=trivia.html`
+            }
+            
+            dataJson = {
+                "uuidUsuarios": uuidUsuarios
+            }
+
+            const settings = {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: 
+                    JSON.stringify(dataJson)
+            };
+                            
+            try {
+                const fetchResponse = await fetch(`${urlServer}dameGrupoByUUID`, settings);
+                const data = await fetchResponse.json();
+                resul = data.statusCode
+                if(resul == 200){
+                    let idEquipos = data.message[0].idEquipos
+                    document.getElementById("botonContinuar").innerHTML = "Grupo " + idEquipos
+                    console.log("Grupo: " + idEquipos)
+                }else{
+                    console.log("Error: " + data.message)
+                }
+            } catch (e) {
+                console.log("Error:" + e)
+            }
     }
 </script>
 </body>

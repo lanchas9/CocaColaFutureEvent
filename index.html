@@ -35,6 +35,7 @@
 
         let uuidExperiencias = ""
         let numPuntos = ""
+        let url = ""
         let botonGuardarDatos = false
 
         
@@ -52,6 +53,7 @@
             const urlParams = new URLSearchParams(queryString);
             uuidExperiencias = urlParams.get('uuid');
             numPuntos = urlParams.get('puntos');
+            url = urlParams.get('url');
 
             // if(uuid == null || puntos == null){
             //     window.location.href = `index.html`
@@ -98,6 +100,9 @@
                     let usuarioNuevo = resul.usuarioNuevo
                     if(usuarioNuevo){
                         window.location.href = `equipo.html?equipo=${idEquipos}`
+                        return;
+                    }else if(url=== null ){
+                        window.location.href = `trivia.html?equipo=${idEquipos}`
                         return;
                     }else if((uuidExperiencias === null) && (numPuntos === null) ){
                         window.location.href = `welcome.html`
