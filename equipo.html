@@ -25,10 +25,10 @@
 
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
-            equipo = urlParams.get('equipo');
+            let idEquipos = urlParams.get('idEquipos');
 
             let equipoDiv = document.getElementById("equipo");
-            equipoDiv.innerHTML = `Grupo ${equipo}`
+            equipoDiv.innerHTML = `Grupo ${idEquipos}`
             //wait 5 seconds and redict to welcome.html
            
         }

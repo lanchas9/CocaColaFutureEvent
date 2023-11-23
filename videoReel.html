@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Reel</title>
+    <link rel="stylesheet" href="css/styleVideo.css">
+</head>
+<body>
+    <div class="titulo">Equipos</div>
+    <div>
+        <b class="boton" onclick="ponerVideo()" id="1">1</b>
+        <b class="boton" onclick="ponerVideo()" id="2">2</b>
+        <b class="boton" onclick="ponerVideo()" id="3">3</b>
+        <b class="boton" onclick="ponerVideo()" id="4">4</b>
+        <b class="boton" onclick="ponerVideo()" id="5">5</b>
+        <b class="boton" onclick="ponerVideo()" id="6">6</b>
+        <b class="boton" onclick="ponerVideo()" id="7">7</b>
+        <b class="boton" onclick="ponerVideo()" id="8">8</b>
+        <b class="boton" onclick="ponerVideo()" id="9">9</b>
+        <b class="boton" onclick="ponerVideo()" id="10">10</b>
+    </div>
+    <br>
+    <div class="video">
+        <video id="video" controls autoplay class="video" loop>
+            <source src="videos/1.mp4" type="video/mp4">
+        </video>
+        <img src="img/triviaFutbol.png" alt="" srcset="" class="imagen">
+        <script>
+            async function ponerVideo(){
+                var video = document.getElementById("video");
+                var boton = event.target.id;
+                video.src = "videos/"+boton+".mp4";
+                video.load();
+                video.play();
+            }
+        </script>
+</body>
+</html>
