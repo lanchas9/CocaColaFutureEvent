@@ -1,0 +1,15 @@
+@local = http://localhost:4000/
+@server =   https://mosaico.app:4000/
+@hostname = {{server}}
+
+### helloNode
+GET {{hostname}}
+Content-Type: application/json
+
+### Varias caras para detectar 3 personas
+POST {{hostname}}CocaColaFutureEvent/tablaPuntos
+Content-Type: application/json
+
+{
+    "uuidUsuarios": "fdc6a9c7-d7b0-528a-aa16-0c994780c713"    
+}
