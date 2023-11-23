@@ -34,10 +34,12 @@
                     let lista = document.getElementById("lista")
                     let html = ""
                     for (let i = 0; i < data.message.length; i++) {
+                        let nom = data.message[i].nombreEquipo
+                        let punt = data.message[i].puntosFinales == null ? 0 : data.message[i].puntosFinales
                         if((i % 2) == 1){
-                            html += "<div class='title4'>" + data.message[i].nombreEquipo + " - " + data.message[i].puntosFinales + " puntos</div>"
+                            html += "<div class='title4'>" + nom + " - " + punt + " puntos</div>"
                         }else{
-                            html += "<div class='red title4 '>" + data.message[i].nombreEquipo + " - " + data.message[i].puntosFinales + " puntos</div>"
+                            html += "<div class='red title4 '>" + nom + " - " + punt + " puntos</div>"
                         }
                     }
                     lista.innerHTML = html
