@@ -28,8 +28,13 @@
 
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
-            let uuidExperiencias = urlParams.get('uuid');
-            let numPuntos = urlParams.get('puntos');
+            let uuid_ = urlParams.get('uuid');
+            let uuidExperiencias_ = urlParams.get('uuidExperiencias');
+            let uuidExperiencias = uuid_ == null ? uuidExperiencias_ : uuid_;
+
+            let numPuntos_ = urlParams.get('numPuntos');
+            let puntos_ = urlParams.get('puntos');
+            let numPuntos = numPuntos_ == null ? puntos_ : numPuntos_;
  
             console.log({uuidExperiencias})
             console.log({numPuntos})
