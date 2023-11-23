@@ -19,6 +19,7 @@
     <script>
         function borraCookie(){
             setCookie("uuidUsuarios", "",10)
+            localStorage.setItem("uuidUsuarios", "");
         }
 
         async function cargaDatos(){

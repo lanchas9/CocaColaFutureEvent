@@ -41,10 +41,15 @@
         
         function borraCookie(){
             setCookie("uuidUsuarios", "",10)
+            localStorage.setItem("uuidUsuarios", "");
         }
 
         async function cargaDatos(){
-            let uuidUsuarios = getCookie("uuidUsuarios")
+            let a = getCookie("uuidUsuarios")
+            let b = localStorage.getItem("uuidUsuarios");
+            a =  a == null ? "" : a;
+            b =  b == null ? "" : b;
+            let uuidUsuarios = a == "" ? a : b;
             if(uuidUsuarios != ""){
                 window.location.href = `welcome.html`
             }
@@ -97,6 +102,7 @@
                     let uuidUsuarios = objeto.uuidUsuarios
                     let idEquipos = objeto.idEquipos
                     setCookie("uuidUsuarios", uuidUsuarios, 10)
+                    localStorage.setItem("uuidUsuarios", uuidUsuarios);
                     let usuarioNuevo = resul.usuarioNuevo
                     if(usuarioNuevo){
                         window.location.href = `equipo.html?idEquipos=${idEquipos}`
