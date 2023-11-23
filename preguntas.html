@@ -17,9 +17,9 @@
         <p class="respuestas" id="respuestas01" onclick="asignaRespuesta(1)" translate="no"></p>
         <p class="respuestas" id="respuestas02" onclick="asignaRespuesta(2)"translate="no"></p>
         <p class="respuestas" id="respuestas03" onclick="asignaRespuesta(3)"translate="no"></p>
-        <!-- <div class="centrado">
+        <div class="centrado">
             <button class="boton" onclick="paraCronometro()">Siguiente</button>
-        </div> -->
+        </div>
     </div>
     
     <script src="js/jquery.min.js" type="text/javascript"></script>
@@ -32,6 +32,7 @@
         let idUsuario = 0;
         let numPreguntas = 0;
         let tiempoInicio = 0;
+        let idEquipos
         
 
         function paraCronometro(){
@@ -86,10 +87,10 @@
         }
 
         async function cargaPreguntas(){
-            // const queryString = window.location.search;
-            // const urlParams = new URLSearchParams(queryString);
-            // idUsuario = urlParams.get('idUsuario') 
-            // console.log({idUsuario})
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            idEquipos = urlParams.get('idEquipos') 
+            console.log({idEquipos})
             const d = new Date();
             tiempoInicio = d.getTime();
 
@@ -113,7 +114,7 @@
                 },
                  };
                 try {
-                    const fetchResponse = await fetch(`https://mosaico.app:4000/CocaColaFutureEvent/damePreguntasTriviaFinal`, settings);
+                    const fetchResponse = await fetch(`https://mosaico.app:4000/CocaColaFutureEvent/damePreguntasTriviaFinal?idEquipos=${idEquipos}`, settings);
                     const data = await fetchResponse.json();
                     preguntas = data.preguntasData
                     console.log("# Preguntas: " + preguntas.length)

@@ -6,7 +6,7 @@
     <title>Trivia Deportiva</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body onload="cargaDatos()">
     <img src="img/logo.jpg" alt="" srcset="" class="centerImage" onclick="borraCookie()"/>
     <div class="title">Trivia Deportiva "Future Event" </div>
     <div class="goldLine"></div>
@@ -19,8 +19,17 @@
         <button class="botonRegistrarse centerImage" onclick="continuar()">Iniciar Trivia</button>
     </div>
 <script>
+    let idEquipos
+    async function cargaDatos(){
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        idEquipos = urlParams.get('idEquipos');
+        
+    }
+
     async function continuar(){
-        window.location.href = "preguntas.html";
+        window.location.href = "preguntas.html?idEquipos="+idEquipos;
+        
     }
 </script>
 </body>

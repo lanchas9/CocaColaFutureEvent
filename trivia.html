@@ -11,14 +11,15 @@
     <script src="js/cookies.js"></script>
 <script>
     let urlServer = "https://mosaico.app:4000/CocaColaFutureEvent/"
+    let idEquipos
     async function continuar(){
-        window.location.href = "instrucciones.html";
+        window.location.href = "instrucciones.html?idEquipos="+idEquipos;
     }
 
     async function loadGrupo(){
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
-        let idEquipos = urlParams.get('equipo');
+        idEquipos = urlParams.get('idEquipos');
 
         if(idEquipos !== null){
             document.getElementById("botonContinuar").innerHTML = "Grupo " + idEquipos
@@ -50,7 +51,7 @@
                 const data = await fetchResponse.json();
                 resul = data.statusCode
                 if(resul == 200){
-                    let idEquipos = data.message[0].idEquipos
+                    idEquipos = data.message[0].idEquipos
                     document.getElementById("botonContinuar").innerHTML = "Grupo " + idEquipos
                     console.log("Grupo: " + idEquipos)
                 }else{

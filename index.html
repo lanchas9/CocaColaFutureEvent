@@ -99,10 +99,10 @@
                     setCookie("uuidUsuarios", uuidUsuarios, 10)
                     let usuarioNuevo = resul.usuarioNuevo
                     if(usuarioNuevo){
-                        window.location.href = `equipo.html?equipo=${idEquipos}`
+                        window.location.href = `equipo.html?idEquipos=${idEquipos}`
                         return;
                     }else if(url=== null ){
-                        window.location.href = `trivia.html?equipo=${idEquipos}`
+                        window.location.href = `trivia.html?idEquipos=${idEquipos}`
                         return;
                     }else if((uuidExperiencias === null) && (numPuntos === null) ){
                         window.location.href = `welcome.html`
