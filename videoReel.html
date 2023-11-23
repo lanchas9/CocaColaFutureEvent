@@ -22,17 +22,29 @@
     </div>
     <br>
     <div class="video">
-        <video id="video" controls autoplay class="video" loop>
+        <video id="video" controls autoplay class="video">
             <source src="videos/1.mp4" type="video/mp4">
         </video>
-        <img src="img/triviaFutbol.png" alt="" srcset="" class="imagen">
+        <img src="img/triviaFutbol.png" alt="" srcset="" class="imagen oculto" id="qr">
         <script>
+            let index =0;
             async function ponerVideo(){
                 var video = document.getElementById("video");
                 var boton = event.target.id;
                 video.src = "videos/"+boton+".mp4";
                 video.load();
                 video.play();
+                document.getElementById("qr").classList.add("oculto");
+                index++
+                setTimeout(function(){
+                    video.load();
+                    video.play();
+                    document.getElementById("qr").classList.remove("oculto");
+                        setTimeout(function(){
+                        video.load();
+                        video.play();
+                    }, 15000);
+                }, 15000);
             }
         </script>
 </body>
